@@ -24,17 +24,21 @@
     -->
     <script>
         const CONFIGURACAO_DO_SITE = {
-            nomeDoSite: "SOS - Sistemas Operacionais",
+            nomeDoSite: "CIC Fácil",
             subtitulo: "Material de Apoio - Ciência da Computação (Anhanguera)",
             
-            // Glossário: Defina termos que você esquece com frequência
-            glossario: [
-                { termo: "Kernel", def: "O núcleo do SO, gerencia hardware e software." },
-                { termo: "Shell", def: "Interface que interpreta os comandos do usuário." },
-                { termo: "Escalonador", def: "Decide qual processo usa a CPU agora." }
+            // Títulos customizáveis para a seção de apoio (antigo Glossário)
+            tituloBotaoApoio: "📌 O QUE ESTUDAR", 
+            tituloSecaoApoio: "Tópicos Prioritários para Estudo",
+
+            // Itens de apoio: Defina termos ou tópicos importantes aqui
+            itensApoio: [
+                { termo: "Evolução dos S.O", def: "Do inicio a atualidade" },
+                { termo: "Funções dos S.O", def: "Recursos, funções e comandos." },
+                { termo: "Transição Histórica", def: "Monoprogramaveis x Multiprogramaveis" }
             ],
 
-            categorias: ["Geral", "Hardware", "Kernel", "Memória", "Arquivos"],
+            categorias: ["Geral", "Sistema Operacional", "Gestão de Projetos"],
 
             // Seus posts com campo 'alerta' para o que é essencial
             posts: [
@@ -59,17 +63,17 @@
                 <h1 id="site-title" class="text-2xl font-bold text-indigo-600"></h1>
                 <p id="site-subtitle" class="text-sm text-slate-500"></p>
             </div>
-            <div id="glossario-btn" onclick="toggleGlossario()" class="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer hover:bg-amber-200">
-                📖 GLOSSÁRIO
+            <div id="apoio-btn" onclick="toggleApoio()" class="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer hover:bg-amber-200">
+                <!-- Título do botão preenchido via JS -->
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6">
-        <!-- Glossário Rápido (Escondido por padrão) -->
-        <div id="glossario-box" class="hidden bg-white border-2 border-amber-200 rounded-xl p-4 mb-8 shadow-sm">
-            <h3 class="text-amber-800 font-bold mb-3 flex items-center">Termos Importantes</h3>
-            <div id="glossario-lista" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+        <!-- Seção de Apoio (Escondida por padrão) -->
+        <div id="apoio-box" class="hidden bg-white border-2 border-amber-200 rounded-xl p-4 mb-8 shadow-sm">
+            <h3 id="apoio-titulo-secao" class="text-amber-800 font-bold mb-3 flex items-center"></h3>
+            <div id="apoio-lista" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
         </div>
 
         <div class="flex flex-wrap gap-2 mb-10" id="category-list"></div>
@@ -89,10 +93,14 @@
         function renderApp() {
             document.getElementById('site-title').innerText = CONFIGURACAO_DO_SITE.nomeDoSite;
             document.getElementById('site-subtitle').innerText = CONFIGURACAO_DO_SITE.subtitulo;
+            
+            // Atualiza os títulos da seção de apoio baseados na edição rápida
+            document.getElementById('apoio-btn').innerText = CONFIGURACAO_DO_SITE.tituloBotaoApoio;
+            document.getElementById('apoio-titulo-secao').innerText = CONFIGURACAO_DO_SITE.tituloSecaoApoio;
 
-            // Render Glossário
-            const glossFeed = document.getElementById('glossario-lista');
-            glossFeed.innerHTML = CONFIGURACAO_DO_SITE.glossario.map(item => `
+            // Render Itens de Apoio
+            const apoioFeed = document.getElementById('apoio-lista');
+            apoioFeed.innerHTML = CONFIGURACAO_DO_SITE.itensApoio.map(item => `
                 <div>
                     <span class="font-bold text-amber-900">${item.termo}:</span>
                     <span class="text-sm text-amber-800">${item.def}</span>
@@ -137,8 +145,8 @@
             `}).join('');
         }
 
-        function toggleGlossario() {
-            const box = document.getElementById('glossario-box');
+        function toggleApoio() {
+            const box = document.getElementById('apoio-box');
             box.classList.toggle('hidden');
         }
 
