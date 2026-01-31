@@ -9,141 +9,165 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
         .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .category-pill { cursor: pointer; transition: all 0.2s; }
+        .category-pill:hover { transform: translateY(-2px); filter: brightness(0.9); }
+        .category-active { background-color: #4f46e5 !important; color: white !important; }
+        .whitespace-pre-line { white-space: pre-line; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-20">
 
     <!-- 
       ===========================================================
-      ÁREA DE EDIÇÃO RÁPIDA (PARA VOCÊ ALTERAR)
+      ÁREA DE EDIÇÃO RÁPIDA (FOCO EM PRODUTIVIDADE)
       ===========================================================
-      Instruções: Altere apenas o que está entre aspas ou dentro 
-      dos colchetes [ ]. 
     -->
     <script>
         const CONFIGURACAO_DO_SITE = {
-            nomeDoSite: "CIC Facil",
-            subtitulo: "Guia de Estudos para Ciência da Computação (Anhanguera EAD)",
+            nomeDoSite: "SOS - Sistemas Operacionais",
+            subtitulo: "Material de Apoio - Ciência da Computação (Anhanguera)",
             
-            // Menu Flutuante (Lado Esquerdo/Direito)
-            linksDoMenu: [
-                { nome: "Início", link: "#" },
-                { nome: "...", link: "#" },
-                { nome: "...", link: "#" },
-                { nome: "...", link: "#" },
-                { nome: "...", link: "mailto:seu-email@exemplo.com" }
+            // Glossário: Defina termos que você esquece com frequência
+            glossario: [
+                { termo: "Kernel", def: "O núcleo do SO, gerencia hardware e software." },
+                { termo: "Shell", def: "Interface que interpreta os comandos do usuário." },
+                { termo: "Escalonador", def: "Decide qual processo usa a CPU agora." }
             ],
 
-            // Categorias para Filtro
-            categorias: ["Geral", "Sistemas Operacionais", "Gestão de Projetos"],
+            categorias: ["Geral", "Hardware", "Kernel", "Memória", "Arquivos"],
 
-            // Seus Posts/Resumos
+            // Seus posts com campo 'alerta' para o que é essencial
             posts: [
                 {
-                    titulo: "O que é um Sistema Operacional?",
-                    categoria: "Sistema Operacional",
-                    data: "31 de Janeiro, 2026",
-                    resumo: "Conceito e resumo detalhado sobre o que é um Sistema Operacional.",
-                    conteudoCompleto: "Imagine o Sistema Operacional como um gerente de um grande hotel movimentado. \n\n Neste grande hotel existem os quartos e serviços (hardwares) e os hóspedes (softwares), para o hotel funcionar os quartos precisam estar prontos e comportar os hóspedes, e os hóspedes precisam encontrar seus quartos e serviços disponíveis para ele. É aonde entra o gerente do hotel, o sistema operacional. Que gerencia quem vai para onde e quem utiliza o que.\n\n- Explicação Técnica: O Sistema Operacional (S.O) é um software (programa/aplicativo) que gerencia todos os hardwares (componentes/peças) e também os demais softwares do dispositivo.\n\nPapel Fundamental: Ele garante que as aplicações (Word, Navegador, Jogos) sejam executadas corretamente e de forma eficiente.\n\nCuriosidade: Quando você liga o PC, o S.O. é o primeiro programa a ser executado e ele só para de trabalhar quando você desliga a máquina."
-                },
-                {
-                    titulo: "Gerenciamento de Processos",
-                    categoria: "Kernel",
-                    data: "30 de Janeiro, 2026",
-                    resumo: "Entendendo o que acontece quando você abre vários programas ao mesmo tempo.",
-                    conteudoCompleto: "O escalonador do SO decide qual processo usa a CPU em determinado momento usando algoritmos como Round Robin..."
+                    titulo: "Conceitos Iniciais de S.O",
+                    categoria: "Geral",
+                    data: "31 de Jan, 2026",
+                    alerta: "⚠️ Cai na Prova: O SO é o gerente de recursos!",
+                    resumo: "Resumo dos primeiros slides da aula 01.",
+                    conteudoCompleto: "O Sistema Operacional funciona como uma camada de abstração.\n\nSem ele, o usuário teria que lidar diretamente com sinais elétricos do hardware.\n\nPrincipais funções:\n1. Gerência de Processos\n2. Gerência de Memória\n3. Gerência de Dispositivos"
                 }
             ]
         };
+
+        let categoriaAtiva = "Todas";
     </script>
     <!-- =========================================================== -->
 
-    <!-- Interface (Não precisa mexer aqui, a mágica acontece via JS abaixo) -->
     <header class="sticky top-0 z-50 glass-effect border-b border-slate-200 py-4 px-6 mb-8">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div>
+            <div onclick="filtrarCategoria('Todas')" class="cursor-pointer">
                 <h1 id="site-title" class="text-2xl font-bold text-indigo-600"></h1>
                 <p id="site-subtitle" class="text-sm text-slate-500"></p>
             </div>
-            <nav id="floating-menu" class="hidden md:flex space-x-6 font-medium text-slate-600"></nav>
+            <div id="glossario-btn" onclick="toggleGlossario()" class="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer hover:bg-amber-200">
+                📖 GLOSSÁRIO
+            </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 pb-20">
-        <!-- Seção de Categorias -->
+    <main class="max-w-5xl mx-auto px-6">
+        <!-- Glossário Rápido (Escondido por padrão) -->
+        <div id="glossario-box" class="hidden bg-white border-2 border-amber-200 rounded-xl p-4 mb-8 shadow-sm">
+            <h3 class="text-amber-800 font-bold mb-3 flex items-center">Termos Importantes</h3>
+            <div id="glossario-lista" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+        </div>
+
         <div class="flex flex-wrap gap-2 mb-10" id="category-list"></div>
 
-        <!-- Feed de Posts -->
-        <div id="posts-feed" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Os cards entrarão aqui automaticamente -->
-        </div>
+        <div id="posts-feed" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
     </main>
 
-    <!-- Modal para leitura completa -->
-    <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-[100]">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-8 shadow-2xl overflow-y-auto max-h-[80vh]">
-            <button onclick="closeModal()" class="float-right text-slate-400 hover:text-slate-600">Fechar ✕</button>
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-[100]">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-8 shadow-2xl overflow-y-auto max-h-[85vh]">
+            <button onclick="closeModal()" class="float-right text-slate-400 hover:text-slate-600 font-bold">FECHAR ✕</button>
             <div id="modal-content"></div>
         </div>
     </div>
 
     <script>
-        // Lógica de Renderização Automática
         function renderApp() {
-            // Títulos
             document.getElementById('site-title').innerText = CONFIGURACAO_DO_SITE.nomeDoSite;
             document.getElementById('site-subtitle').innerText = CONFIGURACAO_DO_SITE.subtitulo;
 
-            // Menu
-            const menu = document.getElementById('floating-menu');
-            menu.innerHTML = CONFIGURACAO_DO_SITE.linksDoMenu.map(link => 
-                `<a href="${link.link}" class="hover:text-indigo-600 transition">${link.nome}</a>`
-            ).join('');
+            // Render Glossário
+            const glossFeed = document.getElementById('glossario-lista');
+            glossFeed.innerHTML = CONFIGURACAO_DO_SITE.glossario.map(item => `
+                <div>
+                    <span class="font-bold text-amber-900">${item.termo}:</span>
+                    <span class="text-sm text-amber-800">${item.def}</span>
+                </div>
+            `).join('');
 
-            // Categorias
+            renderCategories();
+            renderPosts();
+        }
+
+        function renderCategories() {
             const catList = document.getElementById('category-list');
-            catList.innerHTML = CONFIGURACAO_DO_SITE.categorias.map(cat => 
-                `<span class="bg-indigo-50 text-indigo-700 px-4 py-1 rounded-full text-sm font-semibold border border-indigo-100">${cat}</span>`
-            ).join('');
+            const todasClass = categoriaAtiva === "Todas" ? "category-active" : "bg-white text-slate-600 border-slate-200";
+            let html = `<span onclick="filtrarCategoria('Todas')" class="category-pill px-4 py-1 rounded-full text-sm font-semibold border ${todasClass}">Todas</span>`;
+            
+            html += CONFIGURACAO_DO_SITE.categorias.map(cat => {
+                const activeClass = categoriaAtiva === cat ? "category-active" : "bg-indigo-50 text-indigo-700 border-indigo-100";
+                return `<span onclick="filtrarCategoria('${cat}')" class="category-pill px-4 py-1 rounded-full text-sm font-semibold border ${activeClass}">${cat}</span>`;
+            }).join('');
+            catList.innerHTML = html;
+        }
 
-            // Posts
+        function renderPosts() {
             const feed = document.getElementById('posts-feed');
-            feed.innerHTML = CONFIGURACAO_DO_SITE.posts.map((post, index) => `
-                <article class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer" onclick="openPost(${index})">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-500">${post.categoria}</span>
+            const filtrados = categoriaAtiva === "Todas" ? CONFIGURACAO_DO_SITE.posts : CONFIGURACAO_DO_SITE.posts.filter(p => p.categoria === categoriaAtiva);
+
+            feed.innerHTML = filtrados.map((post) => {
+                const originalIndex = CONFIGURACAO_DO_SITE.posts.findIndex(p => p.titulo === post.titulo);
+                return `
+                <article class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold uppercase text-indigo-500">${post.categoria}</span>
                         <span class="text-xs text-slate-400">${post.data}</span>
                     </div>
-                    <h2 class="text-xl font-bold mb-2 text-slate-800">${post.titulo}</h2>
-                    <p class="text-slate-600 leading-relaxed mb-4">${post.resumo}</p>
-                    <div class="text-indigo-600 text-sm font-semibold">Ler resumo completo →</div>
+                    ${post.alerta ? `<div class="bg-red-50 text-red-600 text-[10px] font-bold px-2 py-1 rounded mb-3 uppercase tracking-wider">${post.alerta}</div>` : ''}
+                    <div class="cursor-pointer" onclick="openPost(${originalIndex})">
+                        <h2 class="text-xl font-bold mb-2 text-slate-800">${post.titulo}</h2>
+                        <p class="text-slate-600 text-sm mb-4">${post.resumo}</p>
+                        <div class="text-indigo-600 text-xs font-bold uppercase tracking-widest italic hover:underline">Estudar agora →</div>
+                    </div>
                 </article>
-            `).join('');
+            `}).join('');
+        }
+
+        function toggleGlossario() {
+            const box = document.getElementById('glossario-box');
+            box.classList.toggle('hidden');
+        }
+
+        function filtrarCategoria(cat) {
+            categoriaAtiva = cat;
+            renderCategories();
+            renderPosts();
         }
 
         function openPost(index) {
             const post = CONFIGURACAO_DO_SITE.posts[index];
             const modal = document.getElementById('modal');
             const content = document.getElementById('modal-content');
-            
             content.innerHTML = `
-                <h2 class="text-3xl font-bold mb-2 text-slate-900">${post.titulo}</h2>
-                <div class="mb-6 text-indigo-500 font-medium">${post.categoria} | ${post.data}</div>
-                <div class="prose prose-slate text-slate-700 leading-loose">
-                    ${post.conteudoCompleto.replace(/\n/g, '<br>')}
-                </div>
+                ${post.alerta ? `<div class="bg-red-100 text-red-700 p-3 rounded-lg mb-4 font-bold text-sm">${post.alerta}</div>` : ''}
+                <h2 class="text-3xl font-bold mb-1 text-slate-900">${post.titulo}</h2>
+                <p class="text-indigo-500 mb-6 text-sm">${post.categoria} | ${post.data}</p>
+                <div class="text-slate-700 leading-relaxed text-lg whitespace-pre-line">${post.conteudoCompleto}</div>
             `;
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
-        // Iniciar app quando a página carregar
         window.onload = renderApp;
     </script>
 </body>
