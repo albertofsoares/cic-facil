@@ -27,16 +27,16 @@
             nomeDoSite: "CIC Fácil",
             subtitulo: "Material de Apoio - Ciência da Computação (Anhanguera)",
             
-            // Títulos customizáveis para a seção de apoio (antigo Glossário)
+            // Títulos customizáveis para a seção de apoio
             tituloBotaoApoio: "📌 O QUE ESTUDAR", 
             tituloSecaoApoio: "Tópicos Prioritários para Estudo",
 
             // Itens de apoio: Defina termos ou tópicos importantes aqui
             itensApoio: [
-                { termo: "Definição de S.O", def: "..." },
-                { termo: "Funções dos S.O", def: "..." },
-                { termo: "Evo. Histórica", def: "..." }
-            ]
+                { termo: "Definição de S.O", def: "Software que gerencia o hardware e provê serviços para programas." },
+                { termo: "Funções dos S.O", def: "Gerenciamento de memória, processos e dispositivos de E/S." },
+                { termo: "Evo. Histórica", def: "Desde válvulas e cartões perfurados até sistemas distribuídos atuais." }
+            ],
 
             categorias: ["Geral", "Sistema Operacional", "Gestão de Projetos"],
 
@@ -48,9 +48,21 @@
                     data: "31 de Jan, 2026",
                     alerta: "⚠️ Cai na Prova!", 
                     resumo: "Conteúdo didático sobre a Aula 1 da Unidade 1 de S.O",
-                    conteudoCompleto: "O sistema operacional é um software (programa) que gerencia hardwares (peças) e demais softwares (programas) de um dispositivo (computador, celular, etc)\n\nSegundo Tanenbaum (2003), o sistema operacional é parte essencial de qualquer sistema computacional. e eles não existissem, os sistemas computacionais funcionariam, porém, o usuário teria que saber os detalhes de hardware para utilizá-los, o que seria bem complexo.\n\nUm sistema computacional é composto por hardware e software. \n\nOs hardwares são os componentes físicos do computador, como: \nCPU (unidade central de processamento),\n memória ram,\n mouse,\n teclado,\n monitor,\n entre outros.\n\n Já os softwares são programas (conjunto de instruções) instalados no hardware para executar uma determinada tarefa, como: \nNavegador Web,\n Editor de Textos,\n Spotify,\n Minecraft,\n entre outros."
+                    conteudoCompleto: "O sistema operacional é um software (programa) que gerencia hardwares (peças) e demais softwares (programas) de um dispositivo (computador, celular, etc)\n\nSegundo Tanenbaum (2003), o sistema operacional é parte essencial de qualquer sistema computacional. Se eles não existissem, os sistemas computacionais funcionariam, porém, o usuário teria que saber os detalhes de hardware para utilizá-los, o que seria bem complexo.\n\nUm sistema computacional é composto por hardware e software. \n\nOs hardwares são os componentes físicos do computador, como: \nCPU (unidade central de processamento),\n memória ram,\n mouse,\n teclado,\n monitor,\n entre outros.\n\n Já os softwares são programas (conjunto de instruções) instalados no hardware para executar uma determinada tarefa, como: \nNavegador Web,\n Editor de Textos,\n Spotify,\n Minecraft,\n entre outros."
                 }
-            ] 
+            ]
+        };
+
+        // Variável de controle de estado
+        let categoriaAtiva = "Todas";
+    </script>
+
+    <!-- Layout Visual -->
+    <header class="bg-white border-b border-slate-200 mb-12 sticky top-0 z-50 glass-effect">
+        <div class="max-w-5xl mx-auto px-6 py-6 flex justify-between items-center">
+            <div>
+                <h1 id="site-title" class="text-2xl font-bold text-slate-900 tracking-tight"></h1>
+                <p id="site-subtitle" class="text-slate-500 text-sm"></p>
             </div>
             <div id="apoio-btn" onclick="toggleApoio()" class="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer hover:bg-amber-200">
                 <!-- Título do botão preenchido via JS -->
@@ -90,8 +102,8 @@
             // Render Itens de Apoio
             const apoioFeed = document.getElementById('apoio-lista');
             apoioFeed.innerHTML = CONFIGURACAO_DO_SITE.itensApoio.map(item => `
-                <div>
-                    <span class="font-bold text-amber-900">${item.termo}:</span>
+                <div class="p-2 border border-amber-50 rounded-lg">
+                    <span class="font-bold text-amber-900 block text-xs uppercase">${item.termo}:</span>
                     <span class="text-sm text-amber-800">${item.def}</span>
                 </div>
             `).join('');
@@ -115,6 +127,11 @@
         function renderPosts() {
             const feed = document.getElementById('posts-feed');
             const filtrados = categoriaAtiva === "Todas" ? CONFIGURACAO_DO_SITE.posts : CONFIGURACAO_DO_SITE.posts.filter(p => p.categoria === categoriaAtiva);
+
+            if (filtrados.length === 0) {
+                feed.innerHTML = `<p class="text-slate-400 italic">Nenhum post encontrado nesta categoria.</p>`;
+                return;
+            }
 
             feed.innerHTML = filtrados.map((post) => {
                 const originalIndex = CONFIGURACAO_DO_SITE.posts.findIndex(p => p.titulo === post.titulo);
