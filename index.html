@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SO Study Portal</title>
+    <title>CIC Facil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
@@ -33,10 +33,10 @@
 
             // Itens de apoio: Defina termos ou tópicos importantes aqui
             itensApoio: [
-                { termo: "Evolução dos S.O", def: "Do inicio a atualidade" },
-                { termo: "Funções dos S.O", def: "Recursos, funções e comandos." },
-                { termo: "Transição Histórica", def: "Monoprogramaveis x Multiprogramaveis" }
-            ],
+                { termo: "Definição de S.O", def: "" },
+                { termo: "Funções dos S.O", def: "" },
+                { termo: "Evo. Histórica", def: "" }
+            ]\n\n,
 
             categorias: ["Geral", "Sistema Operacional", "Gestão de Projetos"],
 
@@ -46,22 +46,11 @@
                     titulo: "O que é Sistema Operacional?",
                     categoria: "Sistema Operacional",
                     data: "31 de Jan, 2026",
-                    alerta: "⚠️ Cai na Prova: O SO é o gerente de recursos!",
-                    resumo: "Resumo dos primeiros slides da aula 01.",
-                    conteudoCompleto: "O Sistema Operacional funciona como uma camada de abstração.\n\nSem ele, o usuário teria que lidar diretamente com sinais elétricos do hardware.\n\nPrincipais funções:\n1. Gerência de Processos\n2. Gerência de Memória\n3. Gerência de Dispositivos"
+                    alerta: "⚠️ Cai na Prova!", 
+                    resumo: "Conteúdo didático sobre a Aula 1 da Unidade 1 de S.O",
+                    conteudoCompleto: "O sistema operacional é um software (programa) que gerencia hardwares (peças) e demais softwares (programas) de um dispositivo (computador, celular, etc)\n\nSegundo Tanenbaum (2003), o sistema operacional é parte essencial de qualquer sistema computacional. e eles não existissem, os sistemas computacionais funcionariam, porém, o usuário teria que saber os detalhes de hardware para utilizá-los, o que seria bem complexo.\n\nUm sistema computacional é composto por hardware e software. \n\nOs hardwares são os componentes físicos do computador, como: \nCPU (unidade central de processamento),\n memória ram,\n mouse,\n teclado,\n monitor,\n entre outros.\n\n Já os softwares são programas (conjunto de instruções) instalados no hardware para executar uma determinada tarefa, como: \nNavegador Web,\n Editor de Textos,\n Spotify,\n Minecraft,\n entre outros."
                 }
-            ]
-        };
-
-        let categoriaAtiva = "Todas";
-    </script>
-    <!-- =========================================================== -->
-
-    <header class="sticky top-0 z-50 glass-effect border-b border-slate-200 py-4 px-6 mb-8">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div onclick="filtrarCategoria('Todas')" class="cursor-pointer">
-                <h1 id="site-title" class="text-2xl font-bold text-indigo-600"></h1>
-                <p id="site-subtitle" class="text-sm text-slate-500"></p>
+            ] 
             </div>
             <div id="apoio-btn" onclick="toggleApoio()" class="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer hover:bg-amber-200">
                 <!-- Título do botão preenchido via JS -->
