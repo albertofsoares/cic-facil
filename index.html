@@ -3,19 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIC Facil</title>
+    <title>CIC Fácil - Apoio Acadêmico</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        
+        :root {
+            --bg-main: #f8fafc;
+            --text-main: #0f172a;
+            --card-bg: #ffffff;
+        }
+
+        .dark-mode {
+            --bg-main: #0f172a;
+            --text-main: #f1f5f9;
+            --card-bg: #1e293b;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .glass-effect { 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(10px); 
+        }
+
+        .dark-mode .glass-effect {
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            transition: transform 0.2s;
+        }
+
         .category-pill { cursor: pointer; transition: all 0.2s; }
-        .category-pill:hover { transform: translateY(-2px); filter: brightness(0.9); }
         .category-active { background-color: #4f46e5 !important; color: white !important; }
         .whitespace-pre-line { white-space: pre-line; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen pb-20">
+<body class="min-h-screen pb-20">
 
     <!-- 
       ===========================================================
@@ -27,85 +63,154 @@
             nomeDoSite: "CIC Fácil",
             subtitulo: "Material de Apoio - Ciência da Computação (Anhanguera)",
             
-            // Títulos customizáveis para a seção de apoio
-            tituloBotaoApoio: "📌 O QUE ESTUDAR", 
-            tituloSecaoApoio: "Tópicos Prioritários para Estudo",
+            // Novos recursos de Apoio
+            tituloBotaoApoio: "📌 GUIA RÁPIDO", 
+            tituloSecaoApoio: "Termos que você PRECISA saber",
 
-            // Itens de apoio: Defina termos ou tópicos importantes aqui
             itensApoio: [
-                { termo: "Definição de S.O", def: "Software que gerencia o hardware e provê serviços para programas." },
-                { termo: "Funções dos S.O", def: "Gerenciamento de memória, processos e dispositivos de E/S." },
-                { termo: "Evo. Histórica", def: "Desde válvulas e cartões perfurados até sistemas distribuídos atuais." }
+                { termo: "Kernel", def: "O núcleo do S.O. que faz a ponte entre hardware e software." },
+                { termo: "Shell", def: "Interface que permite ao usuário interagir com o kernel." },
+                { termo: "Thread", def: "A menor unidade de processamento que pode ser executada." }
             ],
 
-            categorias: ["Geral", "Sistema Operacional", "Gestão de Projetos"],
+            // Links externos (Para complementar o estudo)
+            linksUteis: [
+                { nome: "Documentação Oficial", url: "#" },
+                { nome: "Vídeo Aula Recomendada", url: "#" }
+            ],
 
-            // Seus posts com campo 'alerta' para o que é essencial
+            categorias: ["Geral", "Sistema Operacional", "Gestão de Projetos", "Arquitetura"],
+
             posts: [
                 {
+                    id: 1,
                     titulo: "O que é Sistema Operacional?",
                     categoria: "Sistema Operacional",
                     data: "31 de Jan, 2026",
                     alerta: "⚠️ Cai na Prova!", 
-                    resumo: "Conteúdo didático sobre a Aula 1 da Unidade 1 de S.O",
-                    conteudoCompleto: "O sistema operacional é um software (programa) que gerencia hardwares (peças) e demais softwares (programas) de um dispositivo (computador, celular, etc)\n\nSegundo Tanenbaum (2003), o sistema operacional é parte essencial de qualquer sistema computacional. Se eles não existissem, os sistemas computacionais funcionariam, porém, o usuário teria que saber os detalhes de hardware para utilizá-los, o que seria bem complexo.\n\nUm sistema computacional é composto por hardware e software. \n\nOs hardwares são os componentes físicos do computador, como: \nCPU (unidade central de processamento),\n memória ram,\n mouse,\n teclado,\n monitor,\n entre outros.\n\n Já os softwares são programas (conjunto de instruções) instalados no hardware para executar uma determinada tarefa, como: \nNavegador Web,\n Editor de Textos,\n Spotify,\n Minecraft,\n entre outros."
+                    resumo: "Uma visão geral sobre como o software controla o hardware.",
+                    conteudoCompleto: "O sistema operacional é um software (programa) que gerencia hardwares (peças) e demais softwares (programas) de um dispositivo.\n\nImagine o S.O como um gerente de uma empresa: ele decide quem usa a impressora, quanto tempo cada funcionário (programa) pode usar a mesa (processador) e onde os documentos serão guardados (memória)."
+                },
+                {
+                    id: 2,
+                    titulo: "Gerenciamento de Processos",
+                    categoria: "Sistema Operacional",
+                    data: "01 de Fev, 2026",
+                    alerta: "🔥 Importante", 
+                    resumo: "Entenda como o computador faz várias coisas ao mesmo tempo.",
+                    conteudoCompleto: "Um processo é basicamente um programa em execução. O S.O usa o escalonador para decidir qual processo recebe a atenção da CPU a cada milissegundo."
                 }
             ]
         };
 
-        // Variável de controle de estado
         let categoriaAtiva = "Todas";
+        let buscaAtiva = "";
     </script>
 
-    <!-- Layout Visual -->
-    <header class="bg-white border-b border-slate-200 mb-12 sticky top-0 z-50 glass-effect">
-        <div class="max-w-5xl mx-auto px-6 py-6 flex justify-between items-center">
-            <div>
-                <h1 id="site-title" class="text-2xl font-bold text-slate-900 tracking-tight"></h1>
-                <p id="site-subtitle" class="text-slate-500 text-sm"></p>
+    <!-- Header & Navegação -->
+    <header class="border-b border-slate-200 mb-8 sticky top-0 z-50 glass-effect">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+                </div>
+                <div>
+                    <h1 id="site-title" class="text-xl font-bold tracking-tight"></h1>
+                    <p id="site-subtitle" class="text-slate-500 text-xs"></p>
+                </div>
             </div>
-            <div id="apoio-btn" onclick="toggleApoio()" class="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer hover:bg-amber-200">
-                <!-- Título do botão preenchido via JS -->
+            
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Buscar assunto..." class="bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-64 dark:bg-slate-800">
+                
+                <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Mudar tema">
+                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="block dark:hidden"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden dark:block text-amber-400"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                </button>
+
+                <div id="apoio-btn" onclick="toggleApoio()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-xs font-bold cursor-pointer hover:bg-amber-200 transition whitespace-nowrap">
+                </div>
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6">
-        <!-- Seção de Apoio (Escondida por padrão) -->
-        <div id="apoio-box" class="hidden bg-white border-2 border-amber-200 rounded-xl p-4 mb-8 shadow-sm">
-            <h3 id="apoio-titulo-secao" class="text-amber-800 font-bold mb-3 flex items-center"></h3>
-            <div id="apoio-lista" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+        <!-- Seção de Apoio -->
+        <div id="apoio-box" class="hidden bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 mb-8 shadow-sm dark:bg-slate-800 dark:border-amber-900/30">
+            <h3 id="apoio-titulo-secao" class="text-amber-800 font-bold mb-4 flex items-center gap-2 dark:text-amber-400"></h3>
+            <div id="apoio-lista" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"></div>
+            
+            <div class="border-t border-amber-200 pt-4 dark:border-slate-700">
+                <p class="text-xs font-bold text-amber-700 mb-2 uppercase dark:text-amber-500">Links Úteis:</p>
+                <div id="links-lista" class="flex flex-wrap gap-3"></div>
+            </div>
         </div>
 
-        <div class="flex flex-wrap gap-2 mb-10" id="category-list"></div>
+        <!-- Categorias -->
+        <div class="flex flex-wrap gap-2 mb-8" id="category-list"></div>
 
-        <div id="posts-feed" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        <!-- Feed de Posts -->
+        <div id="posts-feed" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
     </main>
 
-    <!-- Modal -->
-    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-[100]">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-8 shadow-2xl overflow-y-auto max-h-[85vh]">
-            <button onclick="closeModal()" class="float-right text-slate-400 hover:text-slate-600 font-bold">FECHAR ✕</button>
+    <!-- Modal de Conteúdo -->
+    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-[100] backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full p-8 shadow-2xl overflow-y-auto max-h-[90vh] relative border dark:border-slate-700">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-all text-2xl font-light">✕</button>
             <div id="modal-content"></div>
         </div>
     </div>
 
     <script>
+        // Sistema de Progresso (localStorage)
+        let postsLidos = JSON.parse(localStorage.getItem('postsLidos')) || [];
+
+        function togglePostStatus(id, event) {
+            event.stopPropagation();
+            if (postsLidos.includes(id)) {
+                postsLidos = postsLidos.filter(i => i !== id);
+            } else {
+                postsLidos.push(id);
+            }
+            localStorage.setItem('postsLidos', JSON.stringify(postsLidos));
+            renderPosts();
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        function handleSearch(val) {
+            buscaAtiva = val.toLowerCase();
+            renderPosts();
+        }
+
         function renderApp() {
+            // Aplicar tema salvo
+            if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+
             document.getElementById('site-title').innerText = CONFIGURACAO_DO_SITE.nomeDoSite;
             document.getElementById('site-subtitle').innerText = CONFIGURACAO_DO_SITE.subtitulo;
-            
-            // Atualiza os títulos da seção de apoio baseados na edição rápida
             document.getElementById('apoio-btn').innerText = CONFIGURACAO_DO_SITE.tituloBotaoApoio;
             document.getElementById('apoio-titulo-secao').innerText = CONFIGURACAO_DO_SITE.tituloSecaoApoio;
 
             // Render Itens de Apoio
             const apoioFeed = document.getElementById('apoio-lista');
             apoioFeed.innerHTML = CONFIGURACAO_DO_SITE.itensApoio.map(item => `
-                <div class="p-2 border border-amber-50 rounded-lg">
-                    <span class="font-bold text-amber-900 block text-xs uppercase">${item.termo}:</span>
-                    <span class="text-sm text-amber-800">${item.def}</span>
+                <div class="p-3 bg-white/50 rounded-xl dark:bg-slate-700/50">
+                    <span class="font-bold text-amber-900 block text-xs uppercase dark:text-amber-300">${item.termo}</span>
+                    <span class="text-sm text-amber-800 dark:text-slate-300">${item.def}</span>
                 </div>
+            `).join('');
+
+            // Render Links
+            const linksFeed = document.getElementById('links-lista');
+            linksFeed.innerHTML = CONFIGURACAO_DO_SITE.linksUteis.map(link => `
+                <a href="${link.url}" target="_blank" class="text-xs bg-amber-200/50 text-amber-800 px-3 py-1 rounded-md hover:bg-amber-300 transition dark:bg-amber-900/30 dark:text-amber-400">
+                    ${link.nome} ↗
+                </a>
             `).join('');
 
             renderCategories();
@@ -114,39 +219,64 @@
 
         function renderCategories() {
             const catList = document.getElementById('category-list');
-            const todasClass = categoriaAtiva === "Todas" ? "category-active" : "bg-white text-slate-600 border-slate-200";
-            let html = `<span onclick="filtrarCategoria('Todas')" class="category-pill px-4 py-1 rounded-full text-sm font-semibold border ${todasClass}">Todas</span>`;
+            const todasClass = categoriaAtiva === "Todas" ? "category-active" : "bg-white text-slate-600 border-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400";
+            let html = `<span onclick="filtrarCategoria('Todas')" class="category-pill px-5 py-2 rounded-full text-sm font-semibold border ${todasClass}">Todas</span>`;
             
             html += CONFIGURACAO_DO_SITE.categorias.map(cat => {
-                const activeClass = categoriaAtiva === cat ? "category-active" : "bg-indigo-50 text-indigo-700 border-indigo-100";
-                return `<span onclick="filtrarCategoria('${cat}')" class="category-pill px-4 py-1 rounded-full text-sm font-semibold border ${activeClass}">${cat}</span>`;
+                const activeClass = categoriaAtiva === cat ? "category-active" : "bg-white text-slate-600 border-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400";
+                return `<span onclick="filtrarCategoria('${cat}')" class="category-pill px-5 py-2 rounded-full text-sm font-semibold border ${activeClass}">${cat}</span>`;
             }).join('');
             catList.innerHTML = html;
         }
 
         function renderPosts() {
             const feed = document.getElementById('posts-feed');
-            const filtrados = categoriaAtiva === "Todas" ? CONFIGURACAO_DO_SITE.posts : CONFIGURACAO_DO_SITE.posts.filter(p => p.categoria === categoriaAtiva);
+            let filtrados = CONFIGURACAO_DO_SITE.posts;
+
+            if (categoriaAtiva !== "Todas") {
+                filtrados = filtrados.filter(p => p.categoria === categoriaAtiva);
+            }
+
+            if (buscaAtiva) {
+                filtrados = filtrados.filter(p => 
+                    p.titulo.toLowerCase().includes(buscaAtiva) || 
+                    p.resumo.toLowerCase().includes(buscaAtiva)
+                );
+            }
 
             if (filtrados.length === 0) {
-                feed.innerHTML = `<p class="text-slate-400 italic">Nenhum post encontrado nesta categoria.</p>`;
+                feed.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400">Nenhum conteúdo encontrado.</div>`;
                 return;
             }
 
             feed.innerHTML = filtrados.map((post) => {
-                const originalIndex = CONFIGURACAO_DO_SITE.posts.findIndex(p => p.titulo === post.titulo);
+                const lido = postsLidos.includes(post.id);
                 return `
-                <article class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-bold uppercase text-indigo-500">${post.categoria}</span>
-                        <span class="text-xs text-slate-400">${post.data}</span>
+                <article class="card p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all group relative">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-[10px] font-black uppercase px-2 py-1 rounded bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400">${post.categoria}</span>
+                        <button onclick="togglePostStatus(${post.id}, event)" class="text-xs flex items-center gap-1 ${lido ? 'text-green-500 font-bold' : 'text-slate-300 hover:text-slate-500'}">
+                            ${lido ? '✅ Concluído' : '⚪ Marcar lido'}
+                        </button>
                     </div>
-                    ${post.alerta ? `<div class="bg-red-50 text-red-600 text-[10px] font-bold px-2 py-1 rounded mb-3 uppercase tracking-wider">${post.alerta}</div>` : ''}
-                    <div class="cursor-pointer" onclick="openPost(${originalIndex})">
-                        <h2 class="text-xl font-bold mb-2 text-slate-800">${post.titulo}</h2>
-                        <p class="text-slate-600 text-sm mb-4">${post.resumo}</p>
-                        <div class="text-indigo-600 text-xs font-bold uppercase tracking-widest italic hover:underline">Estudar agora →</div>
+                    
+                    <div class="cursor-pointer" onclick="openPost(${post.id})">
+                        <h2 class="text-xl font-bold mb-2 group-hover:text-indigo-600 transition-colors">${post.titulo}</h2>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mb-6 line-clamp-2">${post.resumo}</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] text-slate-400 font-medium">${post.data}</span>
+                            <div class="text-indigo-600 text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+                                Estudar <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
                     </div>
+
+                    ${post.alerta ? `
+                        <div class="absolute -top-2 -right-2 bg-rose-500 text-white text-[9px] font-black px-2 py-1 rounded-lg shadow-lg rotate-3 uppercase">
+                            ${post.alerta}
+                        </div>
+                    ` : ''}
                 </article>
             `}).join('');
         }
@@ -162,15 +292,22 @@
             renderPosts();
         }
 
-        function openPost(index) {
-            const post = CONFIGURACAO_DO_SITE.posts[index];
+        function openPost(id) {
+            const post = CONFIGURACAO_DO_SITE.posts.find(p => p.id === id);
             const modal = document.getElementById('modal');
             const content = document.getElementById('modal-content');
             content.innerHTML = `
-                ${post.alerta ? `<div class="bg-red-100 text-red-700 p-3 rounded-lg mb-4 font-bold text-sm">${post.alerta}</div>` : ''}
-                <h2 class="text-3xl font-bold mb-1 text-slate-900">${post.titulo}</h2>
-                <p class="text-indigo-500 mb-6 text-sm">${post.categoria} | ${post.data}</p>
-                <div class="text-slate-700 leading-relaxed text-lg whitespace-pre-line">${post.conteudoCompleto}</div>
+                <div class="max-w-2xl mx-auto">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-xs font-bold text-indigo-500 uppercase">${post.categoria}</span>
+                        <span class="text-slate-300">•</span>
+                        <span class="text-xs text-slate-400">${post.data}</span>
+                    </div>
+                    <h2 class="text-4xl font-black mb-6 leading-tight">${post.titulo}</h2>
+                    <div class="prose dark:prose-invert max-w-none">
+                        <div class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg whitespace-pre-line">${post.conteudoCompleto}</div>
+                    </div>
+                </div>
             `;
             modal.classList.remove('hidden');
             modal.classList.add('flex');
