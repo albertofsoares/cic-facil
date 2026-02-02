@@ -50,20 +50,15 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
-        /* Ajuste de contraste para o campo de busca */
-        #search-input {
-            color: white !important;
-        }
-        #search-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
+        #search-input { color: white !important; }
+        #search-input::placeholder { color: rgba(255, 255, 255, 0.6); }
     </style>
 </head>
 <body class="min-h-screen pb-20">
 
     <!-- 
       ===========================================================
-      ÁREA DE EDIÇÃO RÁPIDA (FOCO EM PRODUTIVIDADE)
+      CONFIGURAÇÃO GERAL (Título, Links e Categorias)
       ===========================================================
     -->
     <script>
@@ -71,7 +66,6 @@
             nomeDoSite: "CIC Fácil",
             subtitulo: "Material de Apoio - Ciência da Computação (Anhanguera)",
             
-            // Novos recursos de Apoio
             tituloBotaoApoio: "📌 GUIA RÁPIDO", 
             tituloSecaoApoio: "Termos que você PRECISA saber",
 
@@ -81,7 +75,6 @@
                 { termo: "Thread", def: "A menor unidade de processamento que pode ser executada." }
             ],
 
-            // Links externos (Para complementar o estudo)
             linksUteis: [
                 { nome: "Documentação Oficial", url: "#" },
                 { nome: "Vídeo Aula Recomendada", url: "#" }
@@ -89,24 +82,47 @@
 
             categorias: ["Geral", "Sistema Operacional", "Gestão de Projetos", "Arquitetura"],
 
+            // DEFINIÇÃO DOS CARDS (O conteúdo textual fica nos templates abaixo no HTML)
             posts: [
                 {
                     id: 1,
-                    titulo: "O que é Sistema Operacional?",
+                    titulo: "Introdução ao S.O",
                     categoria: "Sistema Operacional",
                     data: "31 de Jan, 2026",
                     alerta: "⚠️ Cai na Prova!", 
-                    resumo: "Uma visão geral sobre como o software controla o hardware.",
-                    conteudoCompleto: "O sistema operacional é um software (programa) que gerencia hardwares (peças) e demais softwares (programas) de um dispositivo.\n\nImagine o S.O como um gerente de uma empresa: ele decide quem usa a impressora, quanto tempo cada funcionário (programa) pode usar a mesa (processador) e onde os documentos serão guardados (memória)."
+                    resumo: "Uma visão geral sobre como o software controla o hardware."
                 },
                 {
                     id: 2,
-                    titulo: "Gerenciamento de Processos",
+                    titulo: "Funções Principais do S.O",
                     categoria: "Sistema Operacional",
                     data: "01 de Fev, 2026",
                     alerta: "🔥 Importante", 
-                    resumo: "Entenda como o computador faz várias coisas ao mesmo tempo.",
-                    conteudoCompleto: "Um processo é basicamente um programa em execução. O S.O usa o escalonador para decidir qual processo recebe a atenção da CPU a cada milissegundo."
+                    resumo: "Veja as principais funções do sistema operacional."
+                },
+                {
+                    id: 3,
+                    titulo: "Evolução Histórica dos Sistemas",
+                    categoria: "Sistema Operacional",
+                    data: "01 de Fev, 2026",
+                    alerta: "⚠️ Cai na Prova!",
+                    resumo: "Conheça as quatro evoluções históricas."
+                },
+                {
+                    id: 4,
+                    titulo: "Monoprogramação vs. Multiprogramação",
+                    categoria: "Sistema Operacional",
+                    data: "01 de Fev, 2026",
+                    alerta: "⚠️ Cai na Prova!",
+                    resumo: "A transição entre esses dois conceitos marca o fim da ociosidade do hardware." 
+                },
+                {
+                    id: 5,
+                    titulo: "Camadas do Sistema Computacional",
+                    categoria: "Sistema Operacional",
+                    data: "01 de Fev, 2026",
+                    alerta: "⚠️ Cai na Prova!",
+                    resumo: "Para que um computador funcione, ele é organizado em níveis. Imagine que cada camada só consegue 'falar' com a camada que está logo abaixo ou logo acima dela." 
                 }
             ]
         };
@@ -114,6 +130,137 @@
         let categoriaAtiva = "Todas";
         let buscaAtiva = "";
     </script>
+
+    <!-- 
+      ===========================================================
+      CONTEÚDOS DOS POSTS (EDITE AQUI - MODO FÁCIL)
+      Escreva seu texto naturalmente dentro das tags <template>.
+      O ID deve ser igual ao ID definido no objeto JavaScript acima.
+      ===========================================================
+    -->
+    
+    <template id="post-conteudo-1">
+        1. Definição Técnica
+        O Sistema Operacional (S.O.) é definido como uma camada de software situada entre o hardware e as aplicações do usuário. Sua existência fundamenta-se na necessidade de gerenciar a complexidade dos componentes físicos.
+
+        Citação Base: "Um sistema operacional é um programa que age como intermediário entre o usuário de um computador e o hardware do computador." (Silberschatz et al., 2015).
+
+        Visão de Tanenbaum: Segundo Tanenbaum (2003), o S.O. possui duas funções primordiais:
+
+        Gerenciador de Recursos: Atua como um alocador de recursos (CPU, memória, disco), mediando conflitos de requisições de diferentes programas.
+
+        Máquina Estendida (ou Virtual): Oferece ao programador uma abstração de alto nível, ocultando detalhes complexos e "sujos" do hardware.
+    </template>
+
+    <template id="post-conteudo-2">
+        De acordo com o material da Anhanguera, o S.O. é responsável por quatro pilares operacionais:
+
+        Gerenciamento de Processos: Criação, escalonamento e finalização de processos, garantindo que a CPU seja utilizada de forma eficiente.
+
+        Gerenciamento de Memória: Controle de quais partes da memória estão em uso e por quem, além de gerenciar a troca entre memória principal (RAM) e disco (Memória Virtual).
+
+        Gerenciamento de Arquivos: Organização lógica dos dados em dispositivos de armazenamento, controlando permissões de leitura e escrita.
+
+        Gerenciamento de Dispositivos (E/S): Comunicação com periféricos (teclado, monitor, impressora) através de controladores e drivers.
+    </template>
+
+    <template id="post-conteudo-3">
+        Segundo Tanenbaum (2003), a evolução dos sistemas operacionais está intrinsecamente ligada à evolução da arquitetura computacional. À medida que o hardware se tornava mais potente e menor, o software precisava evoluir para gerenciar essa nova capacidade.
+
+        1ª Geração (1945 – 1955): Válvulas e Painéis
+        Tecnologia: Uso de válvulas que ocupavam salas inteiras.
+
+        Operação: Não existia S.O. O programador era também o operador. A programação era feita fisicamente, conectando cabos em painéis ou através de cartões perfurados com código de máquina puro (0 e 1).
+
+        Limitação: Se uma válvula queimasse, o cálculo era perdido.
+
+        2ª Geração (1955 – 1965): Transistores e Sistemas Batch
+        Tecnologia: Substituição das válvulas por transistores, tornando as máquinas mais confiáveis e "menores".
+
+        Inovação: Surgimento do Sistema em Lote (Batch). Os programadores entregavam seus cartões ao operador, que os agrupava em uma fita magnética para serem processados um após o outro, sem interrupção.
+
+        Linguagens: Surgimento das primeiras linguagens de alto nível, como Fortran, e o uso do Assembly para facilitar a escrita dos comandos.
+
+        3ª Geração (1965 – 1980): Circuitos Integrados e Multiprogramação
+        Tecnologia: Centenas de transistores em uma única pastilha de silício (chips).
+
+        Inovação (Multiprogramação): A grande revolução. Como o hardware era caro, a CPU não podia ficar parada. O S.O. passou a manter vários programas na memória. Quando um programa parava para ler um dado, a CPU saltava imediatamente para outro programa.
+
+        Time-Sharing (Compartilhamento de Tempo): Vários usuários podiam acessar o mesmo computador central através de terminais, criando a sensação de uso exclusivo.
+
+        4ª Geração (1980 – Hoje): Computadores Pessoais e Conectividade
+        Tecnologia: LSI e VLSI (Integração em Escala Muito Grande) — milhões de transistores em um chip minúsculo (microprocessadores).
+
+        A Mudança de Foco: O computador deixou de ser exclusividade de empresas e chegou às casas das pessoas.
+
+        Interface Gráfica (GUI): O surgimento do Windows e do MacOS substituiu os comandos complexos de texto por ícones e janelas, facilitando o uso para leigos.
+
+        Redes e Sistemas Distribuídos: Os sistemas operacionais passaram a gerenciar não apenas um computador, mas a comunicação entre milhares deles (Internet), permitindo que você acesse dados em um servidor do outro lado do mundo como se estivesse no seu próprio HD.
+
+        "A história dos sistemas operacionais é a história da busca pela eficiência. Cada nova geração buscou reduzir o tempo que o hardware ficava ocioso e aumentar a facilidade com que o ser humano interage com a máquina." (Baseado em Tanenbaum, 2003).
+    </template>
+
+    <template id="post-conteudo-4">
+    A transição entre esses dois conceitos marca o fim da ociosidade do hardware. Segundo Tanenbaum (2003), a multiprogramação foi a solução para o fato de que os processadores são muito mais rápidos que os dispositivos de entrada e saída (E/S).
+
+    🔴 O Passado: Monoprogramação (Até meados da década de 1960)
+    Neste modelo, apenas um único programa era carregado na memória principal por vez.
+
+    Funcionamento: A CPU executava o programa do início ao fim. Se o programa precisasse ler um arquivo de uma fita ou aguardar uma impressão, a CPU parava e ficava ociosa (parada) esperando o hardware de E/S terminar a tarefa.
+
+    Desperdício: Em sistemas monoprogramados, cerca de 80% a 90% do tempo do processador era jogado fora, pois ele passava a maior parte do tempo esperando dispositivos mecânicos lentos.
+
+    Contexto: Era o padrão da 1ª e 2ª gerações de computadores.
+
+    🟢 O Presente: Multiprogramação (A partir de 1965 - 3ª Geração)
+    Com a evolução para os Circuitos Integrados, os Sistemas Operacionais passaram a permitir que vários programas residissem na memória simultaneamente.
+
+    Funcionamento: O S.O. divide a memória em várias partes (partições). Enquanto um programa "A" está esperando uma resposta do disco ou uma tecla ser pressionada, o Gerente (S.O.) retira o controle da CPU desse programa e o entrega para um programa "B" que está pronto para processar.
+
+    O "Pulo do Gato": Quando o programa "B" para por qualquer motivo, o S.O. passa para o programa "C", e assim por diante. Isso mantém a CPU ocupada quase 100% do tempo.
+
+    Resultado Técnico: Aumento drástico do Throughput (Vazão), que é a quantidade de tarefas que o sistema consegue terminar em um determinado período.
+    
+    "A ideia central da multiprogramação é que, quando o processo que está sendo executado no momento precisa esperar por E/S, o sistema operacional simplesmente o coloca de lado e escolhe outro processo para rodar." (Tanenbaum, 2003)
+    </template>
+    <template id="post-conteudo-5">
+    Para que um computador funcione, ele é organizado em níveis. Imagine que cada camada só consegue "falar" com a camada que está logo abaixo ou logo acima dela.
+
+    1. Hardware (A Base Física)
+    O que é: São os componentes eletrônicos, as peças e os dispositivos físicos.
+
+    Exemplos: Processador (CPU), Memória RAM, Placa-mãe, Disco Rígido (HD/SSD) e periféricos (teclado, mouse).
+
+    Função: Fornecer os recursos básicos de computação (poder de cálculo e espaço de armazenamento).
+
+    2. Sistema Operacional (O Grande Gestor)
+    O que é: É a primeira camada de software que "toca" o hardware.
+
+    Função: Ele é o único que tem o poder de gerenciar tanto o Hardware quanto os Softwares.
+
+    Para o Hardware: Ele controla as peças (decide quanto de RAM cada um usa).
+
+    Para o Software: Ele fornece um ambiente seguro para que os programas rodem sem um travar o outro.
+
+    3. Programas de Sistema (Utilitários de Apoio)
+    O que é: São ferramentas que ajudam o Sistema Operacional a funcionar melhor ou ajudam o programador a criar novos softwares. Eles não são o S.O., mas trabalham "colados" nele.
+
+    Exemplos: Compiladores (que traduzem código), Interpretadores de Comando (como o Prompt de Comando ou Terminal) e ferramentas de desfragmentação de disco.
+
+    Diferença: Eles servem para dar manutenção ou suporte ao sistema, e não para o uso final do usuário comum.
+
+    4. Programas de Aplicação (Softwares de Usuário)
+    O que é: São os programas que nós usamos para realizar tarefas específicas no dia a dia.
+
+    Exemplos: Navegadores de internet (Chrome), Editores de texto (Word), Planilhas (Excel) e Jogos.
+
+    Limitação: Eles não conseguem falar direto com as peças (Hardware). Se o Word quer imprimir algo, ele precisa pedir "por favor" ao Sistema Operacional, que então manda o comando para a impressora.
+    
+    Resumo: Segundo a literatura técnica, o Sistema Operacional funciona como uma interface. Ele protege o hardware (peças) de serem acessadas diretamente pelos programas de aplicação (usuário), garantindo a integridade de todo o conjunto.
+
+    </template>
+
+    <!-- ======================================================= -->
 
     <!-- Header & Navegação -->
     <header class="border-b border-slate-200 mb-8 sticky top-0 z-50 glass-effect">
@@ -129,7 +276,6 @@
             </div>
             
             <div class="flex items-center gap-3 w-full md:w-auto">
-                <!-- Campo de busca atualizado com cores para melhor contraste -->
                 <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Buscar assunto..." class="bg-slate-700 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-64 dark:bg-slate-800">
                 
                 <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Mudar tema">
@@ -137,41 +283,36 @@
                     <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden dark:block text-amber-400"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                 </button>
 
-                <div id="apoio-btn" onclick="toggleApoio()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-xs font-bold cursor-pointer hover:bg-amber-200 transition whitespace-nowrap">
-                </div>
+                <div id="apoio-btn" onclick="toggleApoio()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-xs font-bold cursor-pointer hover:bg-amber-200 transition whitespace-nowrap"></div>
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6">
-        <!-- Seção de Apoio -->
         <div id="apoio-box" class="hidden bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 mb-8 shadow-sm dark:bg-slate-800 dark:border-amber-900/30">
-            <h3 id="apoio-titulo-secao" class="text-amber-800 font-bold mb-4 flex items-center gap-2 dark:text-amber-400"></h3>
+            <h3 id="apoio-titulo-secao" class="text-amber-800 font-bold mb-4 dark:text-amber-400"></h3>
             <div id="apoio-lista" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"></div>
-            
             <div class="border-t border-amber-200 pt-4 dark:border-slate-700">
                 <p class="text-xs font-bold text-amber-700 mb-2 uppercase dark:text-amber-500">Links Úteis:</p>
                 <div id="links-lista" class="flex flex-wrap gap-3"></div>
             </div>
         </div>
 
-        <!-- Categorias -->
         <div class="flex flex-wrap gap-2 mb-8" id="category-list"></div>
-
-        <!-- Feed de Posts -->
         <div id="posts-feed" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
     </main>
 
-    <!-- Modal de Conteúdo -->
-    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-[100] backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full p-8 shadow-2xl overflow-y-auto max-h-[90vh] relative border dark:border-slate-700">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-all text-2xl font-light">✕</button>
-            <div id="modal-content"></div>
+    <!-- Modal com Cabeçalho Fixo -->
+    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-[100] backdrop-blur-sm" onclick="handleOutsideClick(event)">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full shadow-2xl overflow-hidden relative border dark:border-slate-700 flex flex-col max-h-[90vh]">
+            <div class="flex justify-end p-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
+                <button onclick="closeModal()" class="text-slate-400 hover:text-rose-500 transition-all text-2xl font-light w-10 h-10 flex items-center justify-center rounded-full">✕</button>
+            </div>
+            <div id="modal-content" class="p-8 overflow-y-auto"></div>
         </div>
     </div>
 
     <script>
-        // Sistema de Progresso (localStorage)
         let postsLidos = JSON.parse(localStorage.getItem('postsLidos')) || [];
 
         function togglePostStatus(id, event) {
@@ -187,8 +328,7 @@
 
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
         }
 
         function handleSearch(val) {
@@ -197,27 +337,21 @@
         }
 
         function renderApp() {
-            // Aplicar tema salvo
             if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-
             document.getElementById('site-title').innerText = CONFIGURACAO_DO_SITE.nomeDoSite;
             document.getElementById('site-subtitle').innerText = CONFIGURACAO_DO_SITE.subtitulo;
             document.getElementById('apoio-btn').innerText = CONFIGURACAO_DO_SITE.tituloBotaoApoio;
             document.getElementById('apoio-titulo-secao').innerText = CONFIGURACAO_DO_SITE.tituloSecaoApoio;
 
-            // Render Itens de Apoio
-            const apoioFeed = document.getElementById('apoio-lista');
-            apoioFeed.innerHTML = CONFIGURACAO_DO_SITE.itensApoio.map(item => `
+            document.getElementById('apoio-lista').innerHTML = CONFIGURACAO_DO_SITE.itensApoio.map(item => `
                 <div class="p-3 bg-white/50 rounded-xl dark:bg-slate-700/50">
                     <span class="font-bold text-amber-900 block text-xs uppercase dark:text-amber-300">${item.termo}</span>
                     <span class="text-sm text-amber-800 dark:text-slate-300">${item.def}</span>
                 </div>
             `).join('');
 
-            // Render Links
-            const linksFeed = document.getElementById('links-lista');
-            linksFeed.innerHTML = CONFIGURACAO_DO_SITE.linksUteis.map(link => `
-                <a href="${link.url}" target="_blank" class="text-xs bg-amber-200/50 text-amber-800 px-3 py-1 rounded-md hover:bg-amber-300 transition dark:bg-amber-900/30 dark:text-amber-400">
+            document.getElementById('links-lista').innerHTML = CONFIGURACAO_DO_SITE.linksUteis.map(link => `
+                <a href="${link.url}" target="_blank" class="text-xs bg-amber-200/50 text-amber-800 px-3 py-1 rounded-md hover:bg-amber-300 dark:bg-amber-900/30 dark:text-amber-400">
                     ${link.nome} ↗
                 </a>
             `).join('');
@@ -230,7 +364,6 @@
             const catList = document.getElementById('category-list');
             const todasClass = categoriaAtiva === "Todas" ? "category-active" : "bg-white text-slate-600 border-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400";
             let html = `<span onclick="filtrarCategoria('Todas')" class="category-pill px-5 py-2 rounded-full text-sm font-semibold border ${todasClass}">Todas</span>`;
-            
             html += CONFIGURACAO_DO_SITE.categorias.map(cat => {
                 const activeClass = categoriaAtiva === cat ? "category-active" : "bg-white text-slate-600 border-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400";
                 return `<span onclick="filtrarCategoria('${cat}')" class="category-pill px-5 py-2 rounded-full text-sm font-semibold border ${activeClass}">${cat}</span>`;
@@ -241,22 +374,8 @@
         function renderPosts() {
             const feed = document.getElementById('posts-feed');
             let filtrados = CONFIGURACAO_DO_SITE.posts;
-
-            if (categoriaAtiva !== "Todas") {
-                filtrados = filtrados.filter(p => p.categoria === categoriaAtiva);
-            }
-
-            if (buscaAtiva) {
-                filtrados = filtrados.filter(p => 
-                    p.titulo.toLowerCase().includes(buscaAtiva) || 
-                    p.resumo.toLowerCase().includes(buscaAtiva)
-                );
-            }
-
-            if (filtrados.length === 0) {
-                feed.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400">Nenhum conteúdo encontrado.</div>`;
-                return;
-            }
+            if (categoriaAtiva !== "Todas") filtrados = filtrados.filter(p => p.categoria === categoriaAtiva);
+            if (buscaAtiva) filtrados = filtrados.filter(p => p.titulo.toLowerCase().includes(buscaAtiva) || p.resumo.toLowerCase().includes(buscaAtiva));
 
             feed.innerHTML = filtrados.map((post) => {
                 const lido = postsLidos.includes(post.id);
@@ -268,45 +387,32 @@
                             ${lido ? '✅ Concluído' : '⚪ Marcar lido'}
                         </button>
                     </div>
-                    
                     <div class="cursor-pointer" onclick="openPost(${post.id})">
                         <h2 class="text-xl font-bold mb-2 group-hover:text-indigo-600 transition-colors">${post.titulo}</h2>
                         <p class="text-slate-500 dark:text-slate-400 text-sm mb-6 line-clamp-2">${post.resumo}</p>
-                        
                         <div class="flex items-center justify-between">
                             <span class="text-[10px] text-slate-400 font-medium">${post.data}</span>
-                            <div class="text-indigo-600 text-xs font-bold uppercase tracking-widest flex items-center gap-1">
-                                Estudar <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                            </div>
+                            <div class="text-indigo-600 text-xs font-bold uppercase tracking-widest flex items-center gap-1">Estudar <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></div>
                         </div>
                     </div>
-
-                    ${post.alerta ? `
-                        <div class="absolute -top-2 -right-2 bg-rose-500 text-white text-[9px] font-black px-2 py-1 rounded-lg shadow-lg rotate-3 uppercase">
-                            ${post.alerta}
-                        </div>
-                    ` : ''}
+                    ${post.alerta ? `<div class="absolute -top-2 -right-2 bg-rose-500 text-white text-[9px] font-black px-2 py-1 rounded-lg shadow-lg rotate-3 uppercase">${post.alerta}</div>` : ''}
                 </article>
             `}).join('');
         }
 
-        function toggleApoio() {
-            const box = document.getElementById('apoio-box');
-            box.classList.toggle('hidden');
-        }
-
-        function filtrarCategoria(cat) {
-            categoriaAtiva = cat;
-            renderCategories();
-            renderPosts();
-        }
+        function toggleApoio() { document.getElementById('apoio-box').classList.toggle('hidden'); }
+        function filtrarCategoria(cat) { categoriaAtiva = cat; renderCategories(); renderPosts(); }
 
         function openPost(id) {
             const post = CONFIGURACAO_DO_SITE.posts.find(p => p.id === id);
+            // BUSCA O CONTEÚDO NO TEMPLATE HTML
+            const template = document.getElementById(`post-conteudo-${id}`);
+            const textoReal = template ? template.innerHTML.trim() : "Conteúdo não disponível.";
+            
             const modal = document.getElementById('modal');
             const content = document.getElementById('modal-content');
             content.innerHTML = `
-                <div class="max-w-2xl mx-auto">
+                <div class="max-w-2xl mx-auto pb-10">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="text-xs font-bold text-indigo-500 uppercase">${post.categoria}</span>
                         <span class="text-slate-300">•</span>
@@ -314,19 +420,21 @@
                     </div>
                     <h2 class="text-4xl font-black mb-6 leading-tight">${post.titulo}</h2>
                     <div class="prose dark:prose-invert max-w-none">
-                        <div class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg whitespace-pre-line">${post.conteudoCompleto}</div>
+                        <div class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg whitespace-pre-line">${textoReal}</div>
                     </div>
                 </div>
             `;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            modal.classList.replace('hidden', 'flex');
             document.body.style.overflow = 'hidden';
+            content.scrollTop = 0;
         }
 
         function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('modal').classList.replace('flex', 'hidden');
             document.body.style.overflow = 'auto';
         }
+
+        function handleOutsideClick(e) { if (e.target.id === 'modal') closeModal(); }
 
         window.onload = renderApp;
     </script>
